@@ -3,4 +3,4 @@ fastapi
 uvicorn
 SQLModel
 asyncpg
-python-dotenv7
+python-dotenv
