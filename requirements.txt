@@ -1,0 +1,6 @@
+scrapy
+fastapi 
+uvicorn
+SQLModel
+asyncpg
+python-dotenv7
