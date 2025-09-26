@@ -4,3 +4,4 @@ uvicorn
 SQLModel
 asyncpg
 python-dotenv
+psycopg2-binary

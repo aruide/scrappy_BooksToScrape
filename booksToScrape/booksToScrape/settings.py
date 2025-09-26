@@ -58,9 +58,10 @@ DOWNLOAD_DELAY = 1
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "booksToScrape.pipelines.BookstoscrapePipeline": 300,
-#}
+ITEM_PIPELINES = {
+    "booksToScrape.pipeline.genre_pipeline.GenrePipeline": 200,
+    "booksToScrape.pipeline.oeuvre_pipeline.OeuvrePipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -85,3 +86,13 @@ DOWNLOAD_DELAY = 1
 
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
+
+DATABASE_USER = "postgres"
+DATABASE_PASSWD = "admin"
+DATABASE_PORT = "5432"
+DATABASE_NAME= "bookstoscrape"
+DATABASE_IP = "localhost"
+
+DATABASE_URL = f"postgresql://{DATABASE_USER}:{DATABASE_PASSWD}@{DATABASE_IP}:{DATABASE_PORT}/{DATABASE_NAME}"
+
+LOG_LEVEL = "INFO"
