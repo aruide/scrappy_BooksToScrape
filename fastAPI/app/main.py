@@ -1,0 +1,18 @@
+from fastapi import FastAPI, Depends
+from app.core.database import database
+from app.utils.exchange import exchange
+
+from app.route.genre_route import router as genre_router
+from app.route.oeuvre_route import router as oeuvre_router
+
+app = FastAPI(
+    title="BooksToScrape",
+)
+
+@app.on_event("startup")
+async def on_startup():
+    # initialise la base de données au démarrage
+    await database.init_db()
+
+app.include_router(genre_router)
+app.include_router(oeuvre_router)
