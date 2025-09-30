@@ -15,6 +15,7 @@ class Oeuvre(SQLModel, table=True):
     nb_review: int
     image_url: str
     genre_fk: int = Field(foreign_key="genre.id_genre")
+    scraping_logs_fk: int = Field(foreign_key="scraping_logs.id_scraping_log")
     
     @classmethod
     def from_item(cls, item: dict, genre_id: int):
@@ -30,4 +31,3 @@ class Oeuvre(SQLModel, table=True):
             image_url=item["image_url"],
             genre_fk=genre_id
         )
-

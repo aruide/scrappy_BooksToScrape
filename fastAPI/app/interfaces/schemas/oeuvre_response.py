@@ -1,5 +1,4 @@
 from pydantic import BaseModel, computed_field
-from app.utils.exchange import exchange
 
 class OeuvreResponse(BaseModel):
     id_oeuvre: int
@@ -13,6 +12,7 @@ class OeuvreResponse(BaseModel):
     nb_review: int
     image_url: str
     genre: str
+    exchange_eur: float
     
     @computed_field
     @property
@@ -21,20 +21,33 @@ class OeuvreResponse(BaseModel):
         
     @computed_field
     @property
-    def prix_euro(self) -> float:
-        return exchange.exchange_livre_to_euro(self.prix_ttc)
+    def prix_ttc_euro(self) -> float:
+        return self.prix_ttc * self.exchange_eur
+    
+    @classmethod
+    def from_dto(cls, dto):
+        return cls(**dto.__dict__)
     
     model_config = {"from_attributes": True}
     
 class PriceOeuvreByGenreResponse(BaseModel):
     genre: str
     prix_ttc_avg: float
+    exchange_eur: float
     
     @computed_field
     @property
     def prix_ttc_avg_euro(self) -> float:
-        return exchange.exchange_livre_to_euro(self.prix_ttc_avg)
+        return self.prix_ttc_avg * self.exchange_eur
+    
+    @classmethod
+    def from_dto(cls, dto):
+        return cls(**dto.__dict__)
         
 class NumberOeuvreByGenreResponse(BaseModel):
     genre: str
     number_oeuvre: float
+    
+    @classmethod
+    def from_dto(cls, dto):
+        return cls(**dto.__dict__)
