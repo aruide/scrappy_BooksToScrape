@@ -10,6 +10,6 @@ def get_genre_service(session: AsyncSession = Depends(get_session)) -> GenreServ
     repo = GenreRepositoryImpl(session)
     return GenreService(repo)
 
-@router.get("/")
+@router.get("/all")
 async def get_all_genres(service: GenreService = Depends(get_genre_service)):
     return await service.list_all_genre()

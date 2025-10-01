@@ -8,6 +8,9 @@ class OeuvreService:
 
     async def list_all_oeuvres(self) -> List[OeuvreEntity]:
         return await self.repository.get_all()
+    
+    async def list_oeuvres_by_upc(self, upc: str) -> List[OeuvreEntity]:
+        return await self.repository.get_oeuvres_by_upc(upc)
 
     async def list_by_genre(self, genre: str) -> List[OeuvreEntity]:
         return await self.repository.get_by_genre(genre)

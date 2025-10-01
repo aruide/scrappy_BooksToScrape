@@ -12,9 +12,15 @@ def get_oeuvre_service(session: AsyncSession = Depends(get_session)) -> OeuvreSe
     repo = OeuvreRepositoryImpl(session)
     return OeuvreService(repo)
 
-@router.get("/", response_model=list[OeuvreResponse])
+@router.get("/all", response_model=list[OeuvreResponse])
 async def get_all_oeuvres(service: OeuvreService = Depends(get_oeuvre_service)):
     dtos = await service.list_all_oeuvres()
+    return [OeuvreResponse.from_dto(dto) for dto in dtos]
+
+@router.get("/upc/{upc}", response_model=list[OeuvreResponse])
+async def get_oeuvres_by_upc(
+    upc: str, service: OeuvreService = Depends(get_oeuvre_service)):
+    dtos = await service.list_oeuvres_by_upc(upc)
     return [OeuvreResponse.from_dto(dto) for dto in dtos]
 
 @router.get("/genre/{genre_name}", response_model=list[OeuvreResponse])

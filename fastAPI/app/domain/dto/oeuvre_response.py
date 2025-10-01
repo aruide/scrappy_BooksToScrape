@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from app.domain.entities.oeuvre_entity import OeuvreEntity
+from datetime import datetime
 
 @dataclass
 class OeuvreDTO:
@@ -15,6 +16,7 @@ class OeuvreDTO:
     image_url: str
     genre: str
     exchange_eur: float
+    scraped_at: datetime
 
     @property
     def prix_ttc(self) -> float:
@@ -25,7 +27,7 @@ class OeuvreDTO:
         return self.prix_ttc * self.exchange_eur
     
     @classmethod
-    def from_model(cls, o: OeuvreEntity, genre_name, rate):
+    def from_model(cls, o: OeuvreEntity, genre_name, rate, scraped_at):
         return cls(
             id_oeuvre=o.id_oeuvre,
             title=o.title,
@@ -38,7 +40,8 @@ class OeuvreDTO:
             nb_review=o.nb_review,
             image_url=o.image_url,
             genre=genre_name,
-            exchange_eur=rate
+            exchange_eur=rate,
+            scraped_at = scraped_at
         )
 
 

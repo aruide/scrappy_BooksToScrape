@@ -1,8 +1,17 @@
-## Installation
+# Installation
+
+> [!WARNING]  
+> Ce projet utilise **deux environnements virtuels distincts** afin d’éviter les conflits de dépendances.  
+> 
+> - L’environnement `venv_scrapy` qui contient Scrapy, FastAPI, Scrapyd.  
+> - L’environnement `venv_scrapydweb` qui contient ScrapydWeb.  
+> 
+> Cette séparation est nécessaire car certaines dépendances (ex : `SQLAlchemy`, `Flask-SQLAlchemy`, `apscheduler`) exigent des versions incompatibles entre elles.  
+
 
 1) clonage du projet GitHub
 ```bash
-git clone 
+git clone https://github.com/aruide/scrappy_BooksToScrape.git
 ```
 
 2) création du `.venv` (pour scrapy, scrapyd + fastAPI)

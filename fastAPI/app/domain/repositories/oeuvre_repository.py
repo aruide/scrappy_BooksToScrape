@@ -4,6 +4,9 @@ from app.domain.dto.oeuvre_response import OeuvreDTO, PriceOeuvreByGenreDTO, Num
 class OeuvreRepository:
     async def get_all(self) -> List[OeuvreDTO]:
         raise NotImplementedError
+    
+    async def get_oeuvres_by_upc(self, upc) -> List[OeuvreDTO]:
+        raise NotImplementedError
 
     async def get_by_genre(self, genre: str) -> List[OeuvreDTO]:
         raise NotImplementedError

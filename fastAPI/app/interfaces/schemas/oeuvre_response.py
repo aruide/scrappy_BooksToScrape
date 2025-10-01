@@ -1,4 +1,5 @@
 from pydantic import BaseModel, computed_field
+from datetime import datetime
 
 class OeuvreResponse(BaseModel):
     id_oeuvre: int
@@ -13,6 +14,7 @@ class OeuvreResponse(BaseModel):
     image_url: str
     genre: str
     exchange_eur: float
+    scraped_at: datetime
     
     @computed_field
     @property
