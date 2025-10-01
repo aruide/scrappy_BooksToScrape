@@ -5,3 +5,5 @@ SQLModel
 asyncpg
 python-dotenv
 psycopg2-binary
+scrapyd
+scrapyd-client

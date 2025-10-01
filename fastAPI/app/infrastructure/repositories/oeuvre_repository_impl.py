@@ -11,37 +11,41 @@ from app.infrastructure.db.oeuvre import Oeuvre
 from app.infrastructure.db.genre import Genre
 from app.infrastructure.db.scraping_logs import ScrapingLogs
 from app.infrastructure.db.exchange_rates import ExchangeRates
+from app.infrastructure.db.oeuvre_scraping import OeuvreScraping
 
 class OeuvreRepositoryImpl(OeuvreRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
     
     async def get_all(self) -> List[OeuvreDTO]:
-        statement = ( select(Oeuvre, Genre.name.label("genre"), ExchangeRates.rate)
-                 .join(Genre)
-                 .join(ScrapingLogs)
-                 .join(ExchangeRates, ScrapingLogs.exchange_rate_fk == ExchangeRates.id_exchange_rate)
+        statement = ( select(Oeuvre, Genre.name, ExchangeRates.rate)
+                    .join(Genre, Genre.id_genre == Oeuvre.genre_fk)
+                    .join(OeuvreScraping, OeuvreScraping.oeuvre_fk == Oeuvre.id_oeuvre)
+                    .join(ScrapingLogs, ScrapingLogs.id_scraping_log == OeuvreScraping.scraping_log_fk)
+                    .join(ExchangeRates, ExchangeRates.id_exchange_rate == ScrapingLogs.exchange_rate_fk)
                  )
         result = await self.session.exec(statement)
         return [OeuvreDTO.from_model(o, genre_name, rate) for o, genre_name, rate in result.all()]
     
     async def get_by_genre(self, genre_name: str) -> List[OeuvreDTO] :
-        statement = ( select(Oeuvre, Genre.name.label("genre"), ExchangeRates.rate)
-                  .join(Genre)
-                  .join(ScrapingLogs)
-                  .join(ExchangeRates, ScrapingLogs.exchange_rate_fk == ExchangeRates.id_exchange_rate)
-                  .where(Genre.name == genre_name)
+        statement = ( select(Oeuvre, Genre.name, ExchangeRates.rate)
+                    .join(Genre, Genre.id_genre == Oeuvre.genre_fk)
+                    .join(OeuvreScraping, OeuvreScraping.oeuvre_fk == Oeuvre.id_oeuvre)
+                    .join(ScrapingLogs, ScrapingLogs.id_scraping_log == OeuvreScraping.scraping_log_fk)
+                    .join(ExchangeRates, ExchangeRates.id_exchange_rate == ScrapingLogs.exchange_rate_fk)
+                    .where(Genre.name == genre_name)
                 )
         result = await self.session.exec(statement)
         return [OeuvreDTO.from_model(o, genre_name, rate) for o, genre_name, rate in result.all()]
     
     async def get_between_prices(self, min_value: float, max_value: float) -> List[OeuvreDTO]:
-        statement = ( select(Oeuvre, Genre.name.label("genre"), ExchangeRates.rate)
-                  .join(Genre)
-                  .join(ScrapingLogs)
-                  .join(ExchangeRates, ScrapingLogs.exchange_rate_fk == ExchangeRates.id_exchange_rate)
-                  .where((Oeuvre.prix_ht * (1 + Oeuvre.taxe))
-                    .between(min_value, max_value)) 
+        statement = ( select(Oeuvre, Genre.name, ExchangeRates.rate)
+                    .join(Genre, Genre.id_genre == Oeuvre.genre_fk)
+                    .join(OeuvreScraping, OeuvreScraping.oeuvre_fk == Oeuvre.id_oeuvre)
+                    .join(ScrapingLogs, ScrapingLogs.id_scraping_log == OeuvreScraping.scraping_log_fk)
+                    .join(ExchangeRates, ExchangeRates.id_exchange_rate == ScrapingLogs.exchange_rate_fk)
+                    .where((Oeuvre.prix_ht * (1 + Oeuvre.taxe))
+                        .between(min_value, max_value)) 
                 )
         result = await self.session.exec(statement)
         return [OeuvreDTO.from_model(o, genre_name, rate) for o, genre_name, rate in result.all()]
@@ -51,9 +55,10 @@ class OeuvreRepositoryImpl(OeuvreRepository):
         single_rate = func.min(ExchangeRates.rate).label("exchange_rate")
     
         statement = ( select(Genre.name, prix_ttc, single_rate)
-                    .join(Oeuvre)
-                    .join(ScrapingLogs)
-                    .join(ExchangeRates, ScrapingLogs.exchange_rate_fk == ExchangeRates.id_exchange_rate)
+                    .join(Genre, Genre.id_genre == Oeuvre.genre_fk)
+                    .join(OeuvreScraping, OeuvreScraping.oeuvre_fk == Oeuvre.id_oeuvre)
+                    .join(ScrapingLogs, ScrapingLogs.id_scraping_log == OeuvreScraping.scraping_log_fk)
+                    .join(ExchangeRates, ExchangeRates.id_exchange_rate == ScrapingLogs.exchange_rate_fk)
                     .group_by(Genre.name)
                     .order_by(prix_ttc.desc())
                     )
@@ -64,7 +69,7 @@ class OeuvreRepositoryImpl(OeuvreRepository):
         nb_oeuvre = func.count(Oeuvre.id_oeuvre).label("nb_oeuvre")
     
         statement = ( select(Genre.name, nb_oeuvre)
-                    .join(Oeuvre)
+                    .join(Genre, Genre.id_genre == Oeuvre.genre_fk)
                     .group_by(Genre.name)
                     .order_by(nb_oeuvre.desc())
                     )

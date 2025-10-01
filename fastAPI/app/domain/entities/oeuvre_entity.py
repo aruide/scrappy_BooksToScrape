@@ -14,4 +14,3 @@ class OeuvreEntity:
     nb_review: int
     image_url: str
     genre_fk: int
-    scraping_logs_fk: int
