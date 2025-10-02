@@ -65,6 +65,7 @@ Monitoring et gestion des spiders avec ScrapydWeb.
 ```
 
 ## URL
+- Lien Books to Scrape: https://books.toscrape.com/
 - FastAPI: http://localhost:8000
 - Scrapyd: http://127.0.0.1:6800
 - Scrapydweb: http://127.0.0.1:5000
