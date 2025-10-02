@@ -7,9 +7,18 @@ from app.application.service.genre_service import GenreService
 router = APIRouter(prefix="/genre", tags=["Genre"])
 
 def get_genre_service(session: AsyncSession = Depends(get_session)) -> GenreService:
+    """
+    Fournit une instance de GenreService avec le repository injecté.
+    """
     repo = GenreRepositoryImpl(session)
     return GenreService(repo)
 
 @router.get("/all")
 async def get_all_genres(service: GenreService = Depends(get_genre_service)):
+    """
+    Récupère la liste complète des genres.
+    
+    Returns:
+        List[str]: Liste des noms de genres.
+    """
     return await service.list_all_genre()
