@@ -58,7 +58,7 @@ scrapyd
 cd fastAPI
 
 # lancer le serveur
-uvicorn app.main:app --reload
+uvicorn main:app --reload
 ```
 
 ## pour l'environnement `.venv_scrapydweb`
