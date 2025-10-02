@@ -54,7 +54,7 @@
 cd fastAPI
 
 # lancer le serveur
-uvicorn app.main:app --reload
+uvicorn main:app --reload
 ```
 
 ## URL
