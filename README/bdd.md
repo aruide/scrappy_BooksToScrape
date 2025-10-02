@@ -1,5 +1,20 @@
 # Base de données
 
+La base de données constitue le socle de persistance du projet scrappy_BooksToScrape.
+Elle stocke toutes les informations extraites par les spiders Scrapy et exposées ensuite via l’API FastAPI.
+
+Elle est conçue pour :
+
+- enregistrer les genres et les œuvres extraites depuis Books to Scrape
+,
+- historiser les sessions de scraping (date, site, taux de change utilisé),
+- conserver les taux de conversion (GBP → EUR par exemple),
+- gérer les liens entre une œuvre et un scraping donné.
+
+> [!WARNING]  
+> Avant d’exécuter le script SQL ci-dessous, il est nécessaire de créer la base PostgreSQL au préalable (par exemple avec CREATE DATABASE books_to_scrape;).
+Le script doit ensuite être exécuté dans cette base pour générer les tables.
+  
 ## Dictionaire de données
 
 ### Table `genre`
