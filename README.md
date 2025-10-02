@@ -71,5 +71,14 @@ Monitoring et gestion des spiders avec ScrapydWeb.
 
 ## Capture d'écran
 
+*interface FastAPI*
+![FastAPI](README/images/fastAPI.PNG)
+
+*interface Scrapyd*
+![Scrapyd](README/images/scrapyd.PNG)
+
+*interface Scrapydweb*
+![Scrapydweb](README/images/scrapydweb.PNG)
+
 ## Licence
 Ce projet est sous licence MIT — voir le fichier LICENSE.

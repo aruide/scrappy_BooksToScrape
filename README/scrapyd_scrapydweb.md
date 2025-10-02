@@ -25,8 +25,13 @@ scrapyd
 ```
 
 2) *déployer un projet Scrapy*
+
+> [!WARNING]  
+> Pour que la commande fonctionne, il faut que le serveur Scrapyd soit lancé. 
+
+
 ```bash
-scrapyd-deploy default -p "nom du projet dans scrapy.cfg"
+scrapyd-deploy local -p "nom du projet dans scrapy.cfg donc booksToScrape"
 
 ```
 
