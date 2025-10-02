@@ -20,7 +20,7 @@ class Oeuvre(SQLModel, table=True):
     def from_item(cls, item: dict, genre_id: int):
         return cls(
             title=item["title"],
-            description=item["description"],
+            description=item.get("description"),
             rating=item["rating"],
             upc=item["upc"],
             prix_ht=item["prix_ht"],
@@ -28,4 +28,5 @@ class Oeuvre(SQLModel, table=True):
             nb_available=item["nb_available"],
             nb_review=item["nb_review"],
             image_url=item["image_url"],
+            genre_fk=genre_id,  # <--- ici
         )

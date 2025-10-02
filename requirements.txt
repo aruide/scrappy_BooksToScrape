@@ -7,3 +7,5 @@ python-dotenv
 psycopg2-binary
 scrapyd
 scrapyd-client
+pytest 
+pytest-asyncio
