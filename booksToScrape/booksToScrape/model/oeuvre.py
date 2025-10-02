@@ -1,5 +1,3 @@
-# booksToScrape/models.py
-
 from sqlmodel import SQLModel, Field
 
 class Oeuvre(SQLModel, table=True):

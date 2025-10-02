@@ -28,6 +28,4 @@ class Oeuvre(SQLModel, table=True):
             nb_available=item["nb_available"],
             nb_review=item["nb_review"],
             image_url=item["image_url"],
-            genre_fk=genre_id
         )
-

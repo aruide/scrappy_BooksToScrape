@@ -1,0 +1,6 @@
+scrapydweb
+scrapyd-client
+SQLAlchemy
+Flask
+Flask-SQLAlchemy
+logparser

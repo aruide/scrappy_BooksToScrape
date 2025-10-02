@@ -1,5 +1,5 @@
 from scrapy import Request, Spider
-from ..items import GenreItem
+from booksToScrape.item.genre_item import GenreItem
 from booksToScrape.loader.genre_loader import GenreLoader
 
 class SpiderGenre(Spider):
