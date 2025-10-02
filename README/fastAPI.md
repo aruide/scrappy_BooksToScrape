@@ -36,11 +36,9 @@
 │         ├── genre_repository_impl.py
 │         └── oeuvre_repository_impl.py
 │
-├── interfaces/                  # Couche d'abstraction (API, DB, etc.)
-│    ├── db/                     # Interfaces DB si nécessaires
-│    └── repositories/           # Interfaces des dépôts
-│
-└── main.py                      # Point d’entrée de l’application FastAPI
+└── interfaces/                  # Couche d'abstraction (API, DB, etc.)
+     ├── db/                     # Interfaces DB si nécessaires
+     └── repositories/           # Interfaces des dépôts
 
 ```
 

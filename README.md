@@ -38,8 +38,9 @@ Monitoring et gestion des spiders avec ScrapydWeb.
 1) [Installation](README/installation.md)
 2) [Base de données](README/bdd.md)
 3) [FastAPI](README/fastAPI.md)
-4) [Scrapy](README/scrapy.md)
-5) [Scrapyd et Scrapydweb](README/scrapyd_scrapydweb.md)
+4) [tests](README/tests.md)
+5) [Scrapy](README/scrapy.md)
+6) [Scrapyd et Scrapydweb](README/scrapyd_scrapydweb.md)
 
 ## Structure principal du projet
 
@@ -65,6 +66,7 @@ Monitoring et gestion des spiders avec ScrapydWeb.
 ```
 
 ## URL
+- Lien Books to Scrape: https://books.toscrape.com/
 - FastAPI: http://localhost:8000
 - Scrapyd: http://127.0.0.1:6800
 - Scrapydweb: http://127.0.0.1:5000
