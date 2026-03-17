@@ -1,6 +1,6 @@
 # scrappy_BooksToScrape
 
-![Logo](README/images/banniere.png)
+![Logo](preview.png)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white)
